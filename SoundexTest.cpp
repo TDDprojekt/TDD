@@ -1,10 +1,24 @@
-class Soundex{
-
-};
+#include <string>
+#include "Soundex.h"
 
 #include "gmock/gmock.h"    //<label id="code.include"/>
 
-TEST(SoundexEncoding, RetainsSoleLetterOfOneLetterWord) { //<label id="code.test"/>
-   Soundex soundex;   //<label id="code.construct"/>
+using ::testing::Eq;
+using ::testing::Test;
+class SoundexEncoding:public Test{
+public:
+    Soundex soundex;
+
+};
+
+TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord) {
+
+   ASSERT_THAT(soundex.encode("A"), Eq("A000"));
 }
+TEST_F(SoundexEncoding,PadsWithThreeZerosForDigits){
+
+    ASSERT_THAT(soundex.encode("Ib"),Eq("I100"));
+}
+
+
 
